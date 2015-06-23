@@ -1,5 +1,5 @@
 {
-    "name":        "fyodore/zf2-maintenance-mode",
+    "name":        "mpalourdio/zf2-maintenance-mode",
     "description": "ZF2 maintenance mode module",
     "license":     "MIT",
     "keywords":    [
