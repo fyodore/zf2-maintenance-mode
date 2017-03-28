@@ -20,12 +20,6 @@ use Zend\Console\Adapter\AdapterInterface as Console;
 
 class Module implements InitProviderInterface, ConfigProviderInterface
 {
-
-    /**
-     * @var array
-     */
-    private $userConfig;
-
     /**
      * @param  ModuleManagerInterface $moduleManager
      * @throws \Exception
@@ -81,20 +75,6 @@ class Module implements InitProviderInterface, ConfigProviderInterface
     }
 
     /**
-     * @return string
-     */
-    public function getResponseContent()
-    {
-        $userConfig = $this->getUserConfig();
-
-        if(isset($userConfig['maintenance']['html']) && is_readable($userConfig['maintenance']['html'])) {
-            return file_get_contents($userConfig['maintenance']['html']);
-        }
-        $message = isset($userConfig['maintenance']['message']) ? $userConfig['maintenance']['message'] : 'Service unavailable';
-        return sprintf('<h1>%s</h1>', $message);
-    }
-
-    /**
      * @return array|mixed|\Traversable
      */
     public function getConfig()
@@ -107,18 +87,14 @@ class Module implements InitProviderInterface, ConfigProviderInterface
      */
     public function getUserConfig()
     {
-        if (!$this->userConfig) {
-            $globPaths   = glob('config/autoload/maintenance{,*.}{global,local}.php', GLOB_BRACE);
-            $globCounter = count($globPaths);
+        $globPaths   = glob('config/autoload/maintenance{,*.}{global,local}.php', GLOB_BRACE);
+        $globCounter = count($globPaths);
 
-            $configFile = __DIR__ . '/../config/maintenance.config.global.php.dist';
-            if ($globCounter > 0) {
-                $configFile = $globPaths[$globCounter - 1];
-            }
-            $this->userConfig = require $configFile;
+        if ($globCounter > 0) {
+            return require $globPaths[$globCounter - 1];
         }
 
-        return $this->userConfig;
+        return require __DIR__ . '/../config/maintenance.config.global.php.dist';
     }
 
     /**

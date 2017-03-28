@@ -1,7 +1,6 @@
-[![PHP 7.0+][ico-engine]][lang]
+[![PHP 5.5+][ico-engine]][lang]
 [![MIT Licensed][ico-license]][license]
-
-[ico-engine]: http://img.shields.io/badge/php-7.0+-8892BF.svg
+[ico-engine]: http://img.shields.io/badge/php-5.5+-8892BF.svg
 [lang]: http://php.net
 [ico-license]: http://img.shields.io/packagist/l/adlawson/veval.svg
 [license]: LICENSE
@@ -17,7 +16,7 @@ It mainly short-circuits the module manager during modules initialization and sh
 Requirements
 ============
   
-PHP 7.0+
+PHP 5.5+
 
 Installation
 ============
@@ -29,9 +28,7 @@ composer require mpalourdio/zf2-maintenance-mode
 
 Add "ZfMaintenanceMode" to your **modules list** in **application.config.php**
 
-Eventually, copy ```maintenance.config.global.php.dist``` to ```config/autoload/maintenance.config.global.php``` to personalize the message and/or the http status code and/or the path of the flag file.  
-
-Instead of the message, you can add an html status page by providing the ```html``` option parameter.
+Eventually, copy ``` maintenance.config.global.php.dist``` to ````config/autoload/maintenance.config.global.php``` to personalize the message and/or the http status code and/or the path of the flag file.
 
 When there is a 'custom_file' config, the file will be displayed instead of the message.
 
